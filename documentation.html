@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System - Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #34495e;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #c0392b;
+        }
+        .highlight {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Hospital Management System (HMS)</h1>
+        <p style="text-align: center;"><strong>Technical Documentation & User Manual</strong></p>
+
+        <div class="highlight">
+            <p><strong>Project Overview:</strong> The Hospital Management System is a robust Command-Line Interface (CLI) Java application that provides comprehensive hospital administration capabilities. It leverages advanced Object-Oriented Programming (OOP) paradigms and connects to a highly structured MariaDB relational database.</p>
+        </div>
+
+        <h2>1. System Architecture</h2>
+        <p>The application is built using a multi-tiered architecture to ensure separation of concerns, maintainability, and scalability:</p>
+        <ul>
+            <li><strong>Model Layer:</strong> Contains the core entities (e.g., <code>Patient</code>, <code>Doctor</code>, <code>Appointment</code>). It utilizes abstract classes and interfaces.</li>
+            <li><strong>DAO Layer (Data Access Object):</strong> Handles all direct database interactions using JDBC. It features a <code>GenericDAO&lt;T, ID&gt;</code> interface for standardized CRUD operations.</li>
+            <li><strong>Service Layer:</strong> Encapsulates business logic, orchestrating calls between the Menu Layer and the DAO Layer.</li>
+            <li><strong>Menu/UI Layer:</strong> Manages the interactive CLI, input validation, and rendering of formatted ASCII tables.</li>
+        </ul>
+
+        <h2>2. Object-Oriented Programming (OOP) Integration</h2>
+        <table>
+            <tr>
+                <th>Concept</th>
+                <th>Implementation in Project</th>
+            </tr>
+            <tr>
+                <td><strong>Encapsulation</strong></td>
+                <td>All class attributes are private and accessed exclusively through getters and setters, ensuring data integrity.</td>
+            </tr>
+            <tr>
+                <td><strong>Inheritance</strong></td>
+                <td>Deep class hierarchy: <code>Person</code> (Abstract) → <code>Staff</code> (Abstract) → <code>Doctor</code> → <code>Surgeon</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>Polymorphism</strong></td>
+                <td>The <code>displayInfo()</code> method is overridden across different entity classes. Overloaded methods exist for custom implementations.</td>
+            </tr>
+            <tr>
+                <td><strong>Abstraction</strong></td>
+                <td>Utilization of abstract methods like <code>getRole()</code> and interface contracts such as <code>Billable</code> and <code>Treatable</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>Composition</strong></td>
+                <td>A <code>Patient</code> <em>has-a</em> <code>MedicalRecord</code>. If the patient is deleted, the record ceases to exist independently.</td>
+            </tr>
+        </table>
+
+        <h2>3. Database Design (MariaDB)</h2>
+        <p>The system utilizes a complex database schema tailored for hospital operations:</p>
+        <ul>
+            <li><strong>Stored Procedures:</strong> Encapsulate complex transactions like <code>sp_RegisterPatient</code> and <code>sp_BookAppointment</code> to ensure atomicity.</li>
+            <li><strong>Triggers:</strong> Automated database actions, such as updating bed statuses automatically upon patient admission or discharge.</li>
+            <li><strong>Views:</strong> Pre-compiled queries for complex reporting, such as <code>vw_BedOccupancy</code> and <code>vw_PendingBills</code>.</li>
+            <li><strong>Functions:</strong> Scalar and table-valued functions for logic like calculating patient age dynamically from their DOB (<code>fn_CalculateAge</code>).</li>
+        </ul>
+
+        <h2>4. Modules & Functionality</h2>
+        <ol>
+            <li><strong>Patient Management:</strong> Registration, profile updating, admission, and discharge workflows.</li>
+            <li><strong>Staff Management:</strong> Categorized handling of Doctors, Nurses, and Receptionists.</li>
+            <li><strong>Appointments:</strong> Real-time scheduling matching patients with doctors.</li>
+            <li><strong>Bed Management:</strong> Live tracking of ward occupancy and bed availability.</li>
+            <li><strong>Pharmacy:</strong> Inventory management with automated deduction on prescription and low-stock alerts.</li>
+            <li><strong>Lab Management:</strong> Test requests and result logging.</li>
+            <li><strong>Billing:</strong> Consolidated invoicing covering bed charges, doctor fees, lab tests, and medicines.</li>
+            <li><strong>Reports:</strong> High-level dashboard overviews for administration.</li>
+        </ol>
+
+        <h2>5. Installation & Execution</h2>
+        <p>To run the system, ensure you have the following prerequisites:</p>
+        <ul>
+            <li>Java JDK 8 or higher.</li>
+            <li>XAMPP (Apache + MySQL/MariaDB).</li>
+            <li>MySQL Connector/J 9.0.0 (placed in the <code>lib/</code> directory).</li>
+        </ul>
+        <p>Execute the provided <code>run.bat</code> or <code>run.ps1</code> script, which configures UTF-8 encoding for enhanced console graphics, compiles the source code, and launches the application.</p>
+
+        <div class="footer">
+            <p>&copy; 2026 Hospital Management System. Created for educational purposes.</p>
+        </div>
+    </div>
+</body>
+</html>

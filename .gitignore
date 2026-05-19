@@ -1,0 +1,33 @@
+# Compiled class files
+bin/
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+# Except the JDBC driver which is required
+!lib/*.jar
+
+# Eclipse/VS Code IDE specific files
+.vscode/
+.settings/
+.project
+.classpath
+*.launch
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

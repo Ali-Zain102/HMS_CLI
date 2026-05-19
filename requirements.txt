@@ -1,0 +1,8 @@
+# Java Project Requirements
+Java Development Kit (JDK) 8 or higher (Java 21 recommended)
+MariaDB 10.4+ or MySQL 8.0+
+mysql-connector-j-9.0.0.jar (already included in lib/ directory)
+XAMPP (for local database server hosting)
+
+# Note: This is a standard Java SE project. No external build tools (Maven/Gradle) are strictly required, 
+# but the mysql-connector-j driver must be in the classpath during compilation and execution.
